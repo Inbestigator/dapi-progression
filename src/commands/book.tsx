@@ -1,16 +1,13 @@
-import { MessageFlags } from "discord-api-types/v10";
 import {
   ActionRow,
   Button,
-  type CommandAutocompleteInteraction,
-  type CommandConfig,
   type CommandInteraction,
-  CommandOption,
   Container,
   Section,
   TextDisplay,
   Thumbnail,
-} from "dressed";
+} from "@dressed/react";
+import { type CommandAutocompleteInteraction, type CommandConfig, CommandOption } from "dressed";
 import { fetchBook, type Work } from "../api.ts";
 
 export const config = {
@@ -57,30 +54,33 @@ export default async function bookCommand(interaction: CommandInteraction<typeof
   try {
     work = await fetchBook("work", id);
   } catch {
-    return interaction.reply({ content: "No results found.", ephemeral: true });
+    return interaction.reply("No results found.", { ephemeral: true });
   }
 
-  return interaction.reply({
-    components: [
-      Container(
-        Section(
-          [
-            TextDisplay(`## ${work.title}\n-# ${authors ?? "Unknown author"}`),
-            TextDisplay(
-              typeof work.description === "string"
-                ? work.description
-                : (work.description?.value ?? "No description available."),
-            ),
-          ],
-          Thumbnail(`https://covers.openlibrary.org/w/olid/${id}.jpg`),
-        ),
-        ActionRow(
-          Button({ custom_id: `ratings-${id}`, label: "Ratings" }),
-          Button({ url: `https://openlibrary.org/works/${id}`, label: "View on OpenLibrary" }),
-        ),
-      ),
-    ],
-    flags: MessageFlags.IsComponentsV2,
-    ephemeral: true,
-  });
+  return interaction.reply(
+    <Container>
+      <Section accessory={<Thumbnail media={`https://covers.openlibrary.org/w/olid/${id}.jpg`} />}>
+        ## {work.title}
+        {"\n"}-# {authors ?? "Unknown author"}
+        <TextDisplay>
+          {typeof work.description === "string"
+            ? work.description
+            : (work.description?.value ?? "No description available.")}
+        </TextDisplay>
+      </Section>
+      <ActionRow>
+        <Button
+          onClick={async (i) => {
+            const ratings = await fetchBook("ratings", id);
+            return i.reply(`${"⭐".repeat(Math.round(ratings.average))} (${ratings.count})`, {
+              ephemeral: true,
+            });
+          }}
+          label="Ratings"
+        />
+        <Button url={`https://openlibrary.org/works/${id}`} label="View on OpenLibrary" />
+      </ActionRow>
+    </Container>,
+    { ephemeral: true },
+  );
 }

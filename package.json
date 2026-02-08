@@ -5,6 +5,7 @@
     "dev": "bun run build -i && bun start"
   },
   "dependencies": {
+    "@dressed/react": "^1.8.5-canary.1",
     "discord-api-types": "^0.38.38",
     "dressed": "^2.0.0-canary.2.1"
   },
