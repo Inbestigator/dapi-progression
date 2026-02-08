@@ -1,6 +1,10 @@
 {
-  "tasks": { "start": "deno -A jsr:@inbestigator/discord-http@0.1.0/cmd start" },
+  "tasks": {
+    "build": "deno -A jsr:@inbestigator/discord-http/cmd build",
+    "start": "deno -A bot.gen.ts",
+    "dev": "deno task build -i && deno task start"
+  },
   "imports": {
-    "@inbestigator/discord-http": "jsr:@inbestigator/discord-http@0.1.0"
+    "@inbestigator/discord-http": "jsr:@inbestigator/discord-http@0.8.8"
   }
 }
