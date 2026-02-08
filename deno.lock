@@ -1,0 +1,45 @@
+{
+  "version": "5",
+  "specifiers": {
+    "jsr:@inbestigator/discord-http@0.1.0": "0.1.0",
+    "jsr:@std/dotenv@~0.225.2": "0.225.6",
+    "jsr:@std/fmt@^1.0.3": "1.0.9",
+    "npm:commander@^12.1.0": "12.1.0",
+    "npm:discord-api-types@~0.37.104": "0.37.120",
+    "npm:tweetnacl@^1.0.3": "1.0.3"
+  },
+  "jsr": {
+    "@inbestigator/discord-http@0.1.0": {
+      "integrity": "686bc3963e79dc1f852ae87a8135f3c16ef39b0aee23aaa2a9baf978f5dc33ae",
+      "dependencies": [
+        "jsr:@std/dotenv",
+        "jsr:@std/fmt",
+        "npm:commander",
+        "npm:discord-api-types",
+        "npm:tweetnacl"
+      ]
+    },
+    "@std/dotenv@0.225.6": {
+      "integrity": "1d6f9db72f565bd26790fa034c26e45ecb260b5245417be76c2279e5734c421b"
+    },
+    "@std/fmt@1.0.9": {
+      "integrity": "2487343e8899fb2be5d0e3d35013e54477ada198854e52dd05ed0422eddcabe0"
+    }
+  },
+  "npm": {
+    "commander@12.1.0": {
+      "integrity": "sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA=="
+    },
+    "discord-api-types@0.37.120": {
+      "integrity": "sha512-7xpNK0EiWjjDFp2nAhHXezE4OUWm7s1zhc/UXXN6hnFFU8dfoPHgV0Hx0RPiCa3ILRpdeh152icc68DGCyXYIw=="
+    },
+    "tweetnacl@1.0.3": {
+      "integrity": "sha512-6rt+RN7aOi1nGMyC4Xa5DdYiukl2UWCbcJft7YhxReBGQD7OAM8Pbxw6YMo4r2diNEA8FEmu32YOn9rhaiE5yw=="
+    }
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@inbestigator/discord-http@0.1.0"
+    ]
+  }
+}
