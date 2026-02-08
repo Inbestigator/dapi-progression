@@ -1,4 +1,4 @@
-import type { MessageComponentInteraction } from "@dressed/dressed";
+import type { MessageComponentInteraction } from "dressed";
 import { fetchBook } from "../../api.ts";
 
 export default async function ratingsButton(

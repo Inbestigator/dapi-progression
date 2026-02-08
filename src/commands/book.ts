@@ -1,28 +1,26 @@
-// deno-lint-ignore no-import-prefix
-import type { APIApplicationCommandStringOption } from "npm:discord-api-types@^0.37.104/v10";
 import {
   ActionRow,
   Button,
   type CommandConfig,
   type CommandInteraction,
-  Option,
-} from "@dressed/dressed";
+  CommandOption,
+} from "dressed";
 import { fetchBook } from "../api.ts";
 
 export const config = {
   description: "Book commands",
   options: [
-    Option({
+    CommandOption({
       type: "Subcommand",
       name: "search",
       description: "Search for a book by name",
       options: [
-        Option({
+        CommandOption({
           type: "String",
           name: "query",
           description: "The title to search for",
           required: true,
-        }) as APIApplicationCommandStringOption,
+        }),
       ],
     }),
   ],

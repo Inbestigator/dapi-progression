@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "build": "dressed build",
+    "start": "bun bot.gen.ts",
+    "dev": "bun run build -i && bun start"
+  },
+  "dependencies": {
+    "dressed": "1.6.1"
+  }
+}
