@@ -6,6 +6,9 @@
   },
   "dependencies": {
     "discord-api-types": "^0.38.38",
-    "dressed": "1.10.1"
+    "dressed": "^2.0.0-canary.2.1"
+  },
+  "devDependencies": {
+    "@dressed/framework": "^0.5.0"
   }
 }

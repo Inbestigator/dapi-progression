@@ -33,11 +33,11 @@ export const config = {
   ],
 } satisfies CommandConfig;
 
-export async function autocomplete(interaction: CommandAutocompleteInteraction) {
-  const subcommand = interaction.getOption("search")?.subcommand();
-  if (subcommand?.name !== "search") return;
+export async function autocomplete(interaction: CommandAutocompleteInteraction<typeof config>) {
+  const query = interaction.options.search?.options.work;
+  if (!query || interaction.focused !== "search.work") return;
 
-  const searchRes = await fetchBook("search", subcommand.getOption("work", true).string());
+  const searchRes = await fetchBook("search", query);
 
   return interaction.sendChoices(
     searchRes.map((r) => ({
@@ -48,10 +48,10 @@ export async function autocomplete(interaction: CommandAutocompleteInteraction) 
 }
 
 export default async function bookCommand(interaction: CommandInteraction<typeof config>) {
-  const subcommand = interaction.getOption("search")?.subcommand();
+  const subcommand = interaction.options.search;
   if (subcommand?.name !== "search") return;
 
-  const [id, authors] = subcommand.getOption("work", true).string().split(":");
+  const [id, authors] = subcommand.options.work.split(":");
   let work: Work;
 
   try {
