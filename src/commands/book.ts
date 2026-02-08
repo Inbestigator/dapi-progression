@@ -6,7 +6,7 @@ import {
   type CommandConfig,
   type CommandInteraction,
   Option,
-} from "@inbestigator/discord-http";
+} from "@dressed/dressed";
 import { fetchBook } from "../api.ts";
 
 export const config = {

@@ -1,4 +1,4 @@
-import type { MessageComponentInteraction } from "@inbestigator/discord-http";
+import type { MessageComponentInteraction } from "@dressed/dressed";
 import { fetchBook } from "../../api.ts";
 
 export default async function ratingsButton(

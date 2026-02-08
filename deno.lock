@@ -1,7 +1,7 @@
 {
   "version": "5",
   "specifiers": {
-    "jsr:@inbestigator/discord-http@0.8.8": "0.8.8",
+    "jsr:@dressed/dressed@0.1.0": "0.1.0",
     "jsr:@std/fmt@^1.0.3": "1.0.9",
     "jsr:@svarta/walk-it@^5.0.1": "5.0.1",
     "npm:@dotenvx/dotenvx@^1.24.0": "1.52.0_picomatch@4.0.3",
@@ -12,8 +12,8 @@
     "npm:tweetnacl@^1.0.3": "1.0.3"
   },
   "jsr": {
-    "@inbestigator/discord-http@0.8.8": {
-      "integrity": "3c743cce7458c0f7fa147e734e9dba4bfb7db9f42934707bdb77a80f52cd8bc0",
+    "@dressed/dressed@0.1.0": {
+      "integrity": "75cb5d84a8bb78c7b5c6e7a711de0bfd3fbce79e5edf0d783a7571c3d95c9d32",
       "dependencies": [
         "jsr:@std/fmt",
         "jsr:@svarta/walk-it",
@@ -288,7 +288,7 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@inbestigator/discord-http@0.8.8"
+      "jsr:@dressed/dressed@0.1.0"
     ]
   }
 }
