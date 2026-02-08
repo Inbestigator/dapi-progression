@@ -1,10 +1,11 @@
 {
   "scripts": {
     "build": "dressed build",
-    "start": "bun bot.gen.ts",
+    "start": "bun .dressed",
     "dev": "bun run build -i && bun start"
   },
   "dependencies": {
-    "dressed": "1.6.1"
+    "discord-api-types": "^0.38.38",
+    "dressed": "1.10.1"
   }
 }

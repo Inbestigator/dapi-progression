@@ -1,4 +1,5 @@
-interface Work {
+export interface Work {
+  title: string;
   description?: string | { value: string };
 }
 
@@ -8,35 +9,32 @@ interface Ratings {
 }
 
 interface Search {
-  key?: string;
-  cover_i?: number;
-  author_name?: string[];
+  key: string;
   title: string;
+  author_name?: string[];
 }
 
-export function fetchBook<R extends true | undefined = undefined>(
-  route: "work",
+export function fetchBook<T extends "work" | "ratings">(
+  route: T,
   work: string,
-  ratings?: R,
-): Promise<R extends true ? Ratings : Work>;
-export function fetchBook(route: "search", query: string): Promise<Search>;
+): Promise<T extends "ratings" ? Ratings : Work>;
+export function fetchBook(route: "search", query: string): Promise<Search[]>;
 
 export async function fetchBook(
-  route: "work" | "search",
+  route: "work" | "search" | "ratings",
   workOrQuery: string,
-  ratings = false,
-): Promise<Work | Search | Ratings> {
+): Promise<Work | Search[] | Ratings> {
   const res = await fetch(
     new URL(
       route === "search"
-        ? `search.json?q=${encodeURIComponent(workOrQuery)}&limit=1`
-        : `works/${workOrQuery}${ratings ? "/ratings.json" : ".json"}`,
+        ? `search.json?q=${encodeURIComponent(workOrQuery)}&limit=15`
+        : `works/${workOrQuery}${route === "ratings" ? "/ratings.json" : ".json"}`,
       "https://openlibrary.org",
     ),
   );
   if (!res.ok) throw new Error("Bad res", { cause: res });
   const data = await res.json();
-  if (route === "search") return data.docs[0];
-  if (ratings) return data.summary;
+  if (route === "search") return data.docs;
+  if (route === "ratings") return data.summary;
   return data;
 }
