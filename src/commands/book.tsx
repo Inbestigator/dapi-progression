@@ -42,7 +42,7 @@ export async function autocomplete(interaction: CommandAutocompleteInteraction<t
   }));
 }
 
-export default async function bookCommand(interaction: CommandInteraction<typeof config>) {
+export default async function (interaction: CommandInteraction<typeof config>) {
   const subcommand = interaction.options.search;
   if (subcommand?.name !== "search") return;
 
@@ -59,7 +59,8 @@ export default async function bookCommand(interaction: CommandInteraction<typeof
     <Container>
       <Section accessory={<Thumbnail media={`https://covers.openlibrary.org/w/olid/${id}.jpg`} />}>
         ## {work.title}
-        {"\n"}-# {authors ?? "Unknown author"}
+        {"\n"}
+        -# {authors ?? "Unknown author"}
         <TextDisplay>
           {typeof work.description === "string"
             ? work.description
@@ -67,15 +68,7 @@ export default async function bookCommand(interaction: CommandInteraction<typeof
         </TextDisplay>
       </Section>
       <ActionRow>
-        <Button
-          onClick={async (i) => {
-            const ratings = await fetchBook("ratings", id);
-            return i.reply(`${"⭐".repeat(Math.round(ratings.average))} (${ratings.count})`, {
-              ephemeral: true,
-            });
-          }}
-          label="Ratings"
-        />
+        <Button custom_id={`ratings-${id}`} label="Ratings" />
         <Button url={`https://openlibrary.org/works/${id}`} label="View on OpenLibrary" />
       </ActionRow>
     </Container>,
