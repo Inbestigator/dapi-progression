@@ -36,19 +36,17 @@ export async function autocomplete(interaction: CommandAutocompleteInteraction<t
 
   const searchRes = await fetchBook("search", query);
 
-  return interaction.sendChoices(
-    searchRes.map((r) => ({
-      name: r.title,
-      value: `${r.key.replace("/works/", "")}:${r.author_name?.join(", ").slice(0, 85)}`,
-    })),
-  );
+  return searchRes.map((r) => ({
+    name: r.title,
+    value: `${r.key.replace("/works/", "")}:${r.author_name?.join(", ").slice(0, 85)}`,
+  }));
 }
 
 export default async function bookCommand(interaction: CommandInteraction<typeof config>) {
   const subcommand = interaction.options.search;
   if (subcommand?.name !== "search") return;
 
-  const [id, authors] = subcommand.options.work.split(":");
+  const [id, authors] = subcommand.options.work.split(":") as [string, string];
   let work: Work;
 
   try {
