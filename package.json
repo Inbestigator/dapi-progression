@@ -1,11 +1,17 @@
 {
   "scripts": {
-    "build": "dressed build",
-    "start": "bun .dressed",
-    "dev": "bun run build -i && bun start"
+    "build": "bun --bun dressed build",
+    "dev": "bun run build -i && bun start",
+    "register": "bun run build -r && bun start",
+    "start": "bun .dressed"
   },
   "dependencies": {
-    "discord-api-types": "^0.38.38",
-    "dressed": "1.10.1"
+    "@dressed/react": "^2.0.0",
+    "dressed": "^2.0.0"
+  },
+  "devDependencies": {
+    "@dressed/framework": "^0.6.0",
+    "@types/node": "^26.1.1",
+    "typescript": "^7.0.2"
   }
 }

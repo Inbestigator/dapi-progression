@@ -20,10 +20,7 @@ export function fetchBook<T extends "work" | "ratings">(
 ): Promise<T extends "ratings" ? Ratings : Work>;
 export function fetchBook(route: "search", query: string): Promise<Search[]>;
 
-export async function fetchBook(
-  route: "work" | "search" | "ratings",
-  workOrQuery: string,
-): Promise<Work | Search[] | Ratings> {
+export async function fetchBook(route: "work" | "search" | "ratings", workOrQuery: string) {
   const res = await fetch(
     new URL(
       route === "search"
@@ -34,7 +31,7 @@ export async function fetchBook(
   );
   if (!res.ok) throw new Error("Bad res", { cause: res });
   const data = await res.json();
-  if (route === "search") return data.docs;
-  if (route === "ratings") return data.summary;
-  return data;
+  if (route === "search") return (data as { docs: Search[] }).docs;
+  if (route === "ratings") return (data as { summary: Ratings }).summary;
+  return data as Work;
 }
